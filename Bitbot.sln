@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Bitbot", "Bitbot\Bitbot.pyproj", "{94798EB5-0505-4925-BB0F-A2253DF6E3C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94798EB5-0505-4925-BB0F-A2253DF6E3C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94798EB5-0505-4925-BB0F-A2253DF6E3C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A3F4745-6DC9-4DD6-94D1-1FCF49B03F2E}
+	EndGlobalSection
+EndGlobal
