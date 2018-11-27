@@ -22,6 +22,46 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bitbot.py" />
+    <Compile Include="config\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\Bitbot_CDO.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\Logger.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\Poloniex.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\PrinterThread.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\TraderThread.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="policy\BollingerPolicy.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="policy\PolicyTemplate.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="policy\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="log\" />
+    <Folder Include="lib\" />
+    <Folder Include="config\" />
+    <Folder Include="policy\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\bitbot.config" />
+    <Content Include="log\bitbot.log" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
