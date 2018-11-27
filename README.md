@@ -52,6 +52,7 @@ Currently this only works with Windows.
 This is a module which holds all of the configurations for BitBot and other threads may reference it to implement the configurations.
 
 ## [BollingerPolicy.py](https://github.com/NoahS96/Bitbot/blob/master/Bitbot/policy/BollingerPolicy.py)
+<img src="https://www.forexmt4indicators.com/wp-content/uploads/2017/08/bollinger-band-Cryptocurrency.jpg" align="top" width="400" height="300" />
 This module holds the tools needed to implement the Bollinger band based trading policy. Works by calculating the Bollinger
 bands for a currency's history makes its' decisions based on the following criteria:
 * If the current price is n% above the lower band and the slope of the lower band is not negative, buy
