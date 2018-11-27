@@ -9,9 +9,8 @@ creation but eventually I would like it to do the following:
 * Allow the loading of different policies (and the user to make their own policies)
 
 ## Issues
-* The API call delay may need to be increased. I'm unsure whether Poloniex is blocking my API key due to too many calls or if their servers are having issues.
 * Does not currently support pure Bitcoin trading. Must use an alt coin (i.e. ETH, XRP, STR, etc.)
-* Has a problem where the with buying/selling immediatly after a sell/buy and continues to repeat this.
+* Has a problem where the with buying/selling immediatly after a sell/buy and continues to repeat this. (This has been fixed by increasing the action interval/delay)
 
 ## Dependencies
 * Python 3.5
