@@ -37,7 +37,7 @@ class BollingerPolicy(PolicyTemplate):
         removeQueue = args['removeQueue']
         removeQueue = args['removeQueueLock']
 
-        priceOverBandPercentage = float(currentPrice)/float(bollingerBands['lowerband'][-1])*100.0
+        priceOverBandPercentage = (float(currentPrice)/float(bollingerBands['lowerband'][-1])*100.0) - 100
         lowerbandGradient = BollingerPolicy.__amplifyGradient__(float(bollingerBands['lowerband'][-1])-float(bollingerBands['lowerband'][-2]))
         upperbandGradient = BollingerPolicy.__amplifyGradient__(float(bollingerBands['upperband'][-1])-float(bollingerBands['upperband'][-2]))
         smaGradient = BollingerPolicy.__amplifyGradient__(float(bollingerBands['sma'][-1])-float(bollingerBands['sma'][-2]))

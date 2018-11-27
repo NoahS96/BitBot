@@ -131,6 +131,7 @@ class TraderThread(threading.Thread):
                 self.printQueue.put(("Error", 'Error retrieving poloniex ticker feed: %s' % (str(e))))
                 self.printQueueLock.release()
                 self.__Logger__.writeFile("Error", 'Error retrieving poloniex ticker feed: %s' %(str(e)))
+                continue
 
             args = self.__buildArgs__(priceCharts, sellPrice, buyPrice, candlesticks)
 
@@ -153,6 +154,7 @@ class TraderThread(threading.Thread):
                     self.printQueue.put(("Error", 'Error retrieving open orders: %s' % (str(e))))
                     self.printQueueLock.release()
                     self.__Logger__.writeFile("Error", 'Error retrieving open orders: %s' % (str(e)))
+                    continue
 
             # Do this when looking to buy
             elif tradingState == self.__BUY_PHASE__:
@@ -160,7 +162,8 @@ class TraderThread(threading.Thread):
                 if self.__policy_class__.shouldBuy(args):
                     # Try buying
                     try:
-                        self.__buyAllIn__(priceCharts)
+                        if not bool(Bitbot_CDO.testing_mode):
+                            self.__buyAllIn__(priceCharts)
                         pass
                     except Exception as e:
                         self.printQueueLock.acquire()
@@ -179,7 +182,8 @@ class TraderThread(threading.Thread):
                 if self.__policy_class__.shouldSell(args):
                     # Try selling
                     try:
-                        self.__sellAllIn__(priceCharts)
+                        if not bool(Bitbot_CDO.testing_mode):
+                            self.__sellAllIn__(priceCharts)
                         pass
                     except Exception as e:
                         self.printQueueLock.acquire()
@@ -199,9 +203,10 @@ class TraderThread(threading.Thread):
 
             # Send status to printer thread
             self.printQueueLock.acquire()
+            self.printQueue.put(("Coin", self.__subjectCurrency__))
             self.printQueue.put(("Status", statusMesg))
             self.printQueue.put((PrinterThread.TICKER_KEY, accountBalances))
-            self.printQueue.put(("Ticker Price", currentPrice))
+            self.printQueue.put(("Ticker Price", currentPrice + " " + self.__principalCurrency__))
             self.printQueueLock.release()
 
             # Use a loop to sleep instead so the sleep times are shorter. This allows the thread
@@ -295,7 +300,7 @@ class TraderThread(threading.Thread):
     #   - Purpose:
     #       Build a poloniex API query and return the resulting candlestick closing history.
     #   - Returns:
-    #       An candlestick closing prices, represented as strings, at the specified interval in the config.
+    #       Candlestick closing prices, as string representation, at the specified interval in the config. (A list of closing prices as floats).
     def __getCandleSticks__(self):
         startDate = None
         endDate = datetime.datetime.now()

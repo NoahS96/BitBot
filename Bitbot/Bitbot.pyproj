@@ -49,6 +49,9 @@
     <Compile Include="policy\PolicyTemplate.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="policy\ZonePolicy.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="policy\__init__.py">
       <SubType>Code</SubType>
     </Compile>
