@@ -35,20 +35,24 @@ class ZonePolicy(PolicyTemplate):
         removeQueue = args['removeQueueLock']
 
         dataframe = pd.DataFrame(candlesticks)
-        mean = dataframe.mean()
-        std = dataframe.std()
+        mean = dataframe.mean().values
+        std = dataframe.std().values
 
         upperbox_floor = mean + std
         upperbox_ceil = upperbox_floor + (std * float(Bitbot_CDO.red_zone_height))
         lowerbox_ceil = mean - std
         lowerbox_floor = lowerbox_ceil - (std * float(Bitbot_CDO.red_zone_height))
 
-        print("mean: %.2f\nstd: %.2f\nuf: %.2f\nuc: %.2f\nlc: %.2f\nlf: %.2f" % (mean, std, upperbox_floor, upperbox_ceil, lowerbox_ceil, lowerbox_floor))
-        print(currentPrice)
-        print(dataframe)
-        if float(currentPrice) >= (upperbox_floor * 1.3):
+        printQueueLock.acquire()
+        printQueue.put(('uf', upperbox_floor))
+        printQueue.put(('lc', lowerbox_ceil))
+        printQueue.put(('ut', upperbox_floor + ((upperbox_ceil - upperbox_floor) * float(Bitbot_CDO.red_zone_threshold))))
+        printQueue.put(('lt', lowerbox_ceil - ((lowerbox_ceil - lowerbox_floor) * float(Bitbot_CDO.red_zone_threshold))))
+        printQueueLock.release()
+
+        if float(currentPrice) >= upperbox_floor + ((upperbox_ceil - upperbox_floor) * float(Bitbot_CDO.red_zone_threshold)):
             return True
-        if float(currentPrice) <= (lowerbox_ceil * 0.6):
+        if float(currentPrice) <= lowerbox_ceil - ((lowerbox_ceil - lowerbox_floor) * float(Bitbot_CDO.red_zone_threshold)):
             return True
 
         return False
